@@ -1,11 +1,5 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace Models.AddressSearchInterfaces {
+namespace AddressSearch.Models.Interfaces {
 public interface IAddress {
-   
-   [BsonId]
-   [BsonRepresentation(BsonType.ObjectId)]
    public string? Id { get; set; }
    public string? Cep {get; set;}
    public string? Logradouro {get; set;}

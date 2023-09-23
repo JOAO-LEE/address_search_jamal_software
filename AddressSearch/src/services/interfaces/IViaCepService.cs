@@ -1,4 +1,4 @@
-using Models.AddressSearchInterfaces;
+using AddressSearch.Models;
 
 namespace Services.ViaCepServiceInterfaces {
 public interface IViaCepService {

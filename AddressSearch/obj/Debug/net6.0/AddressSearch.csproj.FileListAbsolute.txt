@@ -19,3 +19,17 @@
 /home/joaolee/jamal_software/address_search/AddressSearch/obj/Debug/net6.0/ref/AddressSearch.dll
 /home/joaolee/jamal_software/address_search/AddressSearch/obj/Debug/net6.0/AddressSearch.pdb
 /home/joaolee/jamal_software/address_search/AddressSearch/obj/Debug/net6.0/AddressSearch.genruntimeconfig.cache
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/AWSSDK.Core.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/AWSSDK.SecurityToken.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/DnsClient.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/MongoDB.Bson.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/MongoDB.Driver.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/MongoDB.Driver.Core.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/MongoDB.Libmongocrypt.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/SharpCompress.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/Snappier.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/ZstdSharp.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/runtimes/linux/native/libmongocrypt.so
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/runtimes/osx/native/libmongocrypt.dylib
+/home/joaolee/jamal_software/address_search/AddressSearch/bin/Debug/net6.0/runtimes/win/native/mongocrypt.dll
+/home/joaolee/jamal_software/address_search/AddressSearch/obj/Debug/net6.0/AddressSearch.csproj.CopyComplete

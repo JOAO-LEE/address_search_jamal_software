@@ -24,6 +24,6 @@ public class AddressSearchService
     public async Task<Address?> GetAddressByCepNumber(string cepNumber) =>
         await _address.Find(x => x.Cep == cepNumber).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(Address newAddress) =>
+    public async Task CreateAddress(Address newAddress) =>
         await _address.InsertOneAsync(newAddress);
 }

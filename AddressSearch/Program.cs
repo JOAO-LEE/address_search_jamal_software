@@ -1,5 +1,6 @@
 using AddressSearch.Models;
 using AddressSearch.Services;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,10 +17,11 @@ app.MapGet("/{cepNumber}", async (string cepNumber, AddressSearchService address
     {
         var viaCepService = new ViaCepService(httpClient);
         var foundAddressExternal = await viaCepService.GetAddress(cepNumber);
-        if(foundAddressExternal is null)
+        if (foundAddressExternal is null)
         {
         return Results.BadRequest(new { message = "Não existe endereços com o cep informado!" });
         }
+    
     return foundAddressExternal;
     }
     return foundAddressInDB;

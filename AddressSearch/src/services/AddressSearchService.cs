@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 namespace AddressSearch.Services;
 
-public class AddressSearchServ
+public class AddressSearchService
 {
-    private readonly IMongoCollection<Address> _addressCollection;
+    private readonly IMongoCollection<Address> _address;
 
-    public AddressSearchServ(
+    public AddressSearchService(
         IOptions<AddressSearchDatabaseSettings> AddressSearchDatabaseSettings)
     {
         var mongoClient = new MongoClient(
@@ -17,13 +17,13 @@ public class AddressSearchServ
         var mongoDatabase = mongoClient.GetDatabase(
             AddressSearchDatabaseSettings.Value.DatabaseName);
 
-        _addressCollection = mongoDatabase.GetCollection<Address>(
-            AddressSearchDatabaseSettings.Value.BooksCollectionName);
+        _address = mongoDatabase.GetCollection<Address>(
+            AddressSearchDatabaseSettings.Value.AddressCollectionName);
     }
 
-    public async Task<Address?> GetAsync(string cepNumber) =>
-        await _addressCollection.Find(x => x.Cep == cepNumber).FirstOrDefaultAsync();
+    public async Task<Address?> GetAddressByCepNumber(string cepNumber) =>
+        await _address.Find(x => x.Cep == cepNumber).FirstOrDefaultAsync();
 
     public async Task CreateAsync(Address newAddress) =>
-        await _addressCollection.InsertOneAsync(newAddress);
+        await _address.InsertOneAsync(newAddress);
 }

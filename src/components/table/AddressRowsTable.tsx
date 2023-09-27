@@ -1,7 +1,7 @@
 import NoTableMessage from '../NoTableMessage';
 import {useContext} from 'react';
 import AddressContext from '../../context/AddressContext';
-import { TableCell, TableRow, TableBody  } from '@mui/material';
+import { TableCell, TableRow, TableBody } from '@mui/material';
 import { TAddress } from '../../interfaces/IAddress';
 
 export default function AddressesRowsTable() {

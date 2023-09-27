@@ -1,30 +1,48 @@
 using AddressSearch.Models;
 using AddressSearch.Services;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 builder.Services.Configure<AddressSearchDatabaseSettings>(builder.Configuration.GetSection("AddressSearchDatabase"));
+
 builder.Services.AddSingleton<AddressSearchService>();
+builder.Services.AddHttpClient<ViaCepService>();
+builder.Services.AddSingleton<ViaCepService>();
+
 var app = builder.Build();
 
-var httpClient = new HttpClient();
+app.MapGet("/", async (AddressSearchService addressSearchService) =>
+{
+    var foundAddressInDB = await addressSearchService.GetAllAddresses();
 
-app.MapGet("/{cepNumber}", async (string cepNumber, AddressSearchService addressSearchService) => {
-
-    var foundAddressInDB = await addressSearchService.GetAddressByCepNumber(cepNumber);
-    if(foundAddressInDB is null )
+    if (foundAddressInDB.Count() == 0)
     {
-        var viaCepService = new ViaCepService(httpClient);
-        var foundAddressExternal = await viaCepService.GetAddress(cepNumber);
+        return Results.NotFound(new { message = "Não há endereços cadastrados!" });
+    }
+    return Results.Ok(foundAddressInDB);
+});
+
+app.MapGet("/{cepNumber}", async (string cepNumber, AddressSearchService addressSearchService, ViaCepService cepService) =>
+{
+
+   var foundAddressInDB = await addressSearchService.GetAddressByCepNumber(cepNumber);
+    if (foundAddressInDB is not null)
+    {
+        return Results.Ok(foundAddressInDB);
+    } else {
+        var foundAddressExternal = await cepService.GetAddress(cepNumber);
         if (foundAddressExternal is null)
         {
-        return Results.BadRequest(new { message = "Não existe endereços com o cep informado!" });
+            return Results.BadRequest(new { message = "Não existe endereços com o CEP informado!" });
         }
-    
-    return foundAddressExternal;
+        await addressSearchService.CreateAddress(foundAddressExternal);
+        return Results.Ok(foundAddressExternal);
     }
-    return foundAddressInDB;
 });
 
 app.Run();
+

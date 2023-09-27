@@ -1,4 +1,3 @@
-using System.Net.Http;
 using AddressSearch.Models;
 using Services.ViaCepServiceInterfaces;
 
@@ -11,17 +10,18 @@ namespace AddressSearch.Services {
             _client = client;
         }
 
-        public async Task<object> GetAddress(string cepNumber)
+        public async Task<Address> GetAddress(string cepNumber)
         { 
             string ViaCepUrl = $"https://viacep.com.br/ws/{cepNumber}/json"; 
            var requestMessage = new HttpRequestMessage(HttpMethod.Get, ViaCepUrl);
            requestMessage.Headers.Add("Accept", "application/json");
             var response = await _client.SendAsync(requestMessage);
-             if (!response.IsSuccessStatusCode || response == null)
+            var wasRequestSuccesful = !response.IsSuccessStatusCode;
+             if (wasRequestSuccesful)
             {
-                return default!;
+                return null!;
             }
-            var result = await response.Content.ReadFromJsonAsync<object>();
+            var result = await response.Content.ReadFromJsonAsync<Address>();
             return result!;
         }
     }

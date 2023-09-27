@@ -1,3 +1,4 @@
+using System.Data;
 using AddressSearch.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -21,9 +22,18 @@ public class AddressSearchService
             AddressSearchDatabaseSettings.Value.AddressCollectionName);
     }
 
-    public async Task<Address?> GetAddressByCepNumber(string cepNumber) =>
-        await _address.Find(x => x.Cep == cepNumber).FirstOrDefaultAsync();
+    public async Task<List<Address>> GetAllAddresses() 
+        {
+            var allAddressesFound = await _address.Find(_ => true).ToListAsync();
+            return allAddressesFound;
+        }
+    public async Task<Address?> GetAddressByCepNumber(string cepNumber) 
+        {
+            var foundAddress = await _address.Find(x => x.Cep == cepNumber).FirstOrDefaultAsync();
+            return foundAddress;
+        }
 
-    public async Task CreateAddress(Address newAddress) =>
+    public async Task CreateAddress(Address newAddress)  {
         await _address.InsertOneAsync(newAddress);
+    }
 }

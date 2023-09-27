@@ -8,6 +8,16 @@ builder.Logging.AddDebug();
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 builder.Services.Configure<AddressSearchDatabaseSettings>(builder.Configuration.GetSection("AddressSearchDatabase"));
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy(MyAllowSpecificOrigins, policy => {
+        policy.AllowAnyOrigin() // Ou use .WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddSingleton<AddressSearchService>();
 builder.Services.AddHttpClient<ViaCepService>();
@@ -44,5 +54,6 @@ app.MapGet("/{cepNumber}", async (string cepNumber, AddressSearchService address
     }
 });
 
-app.Run();
+app.UseCors(MyAllowSpecificOrigins);
 
+app.Run();

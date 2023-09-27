@@ -4,8 +4,6 @@ import SearchButton from "./SearchButton";
 
 export default function AddressInput () {
   let [addressInput, setAddressInput] = useState("");
-  console.log(addressInput);
-  
 
   let addressRegexExpression = new RegExp(/^\d{8}$/);
   let isInputACep = addressRegexExpression.test(addressInput);

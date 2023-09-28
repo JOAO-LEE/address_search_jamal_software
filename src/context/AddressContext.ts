@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { IAddress } from '../interfaces/IAddress';
 
-const myContext = createContext({} as IAddress);
+const addressContext = createContext({} as IAddress);
 
-export default myContext;
+export default addressContext;

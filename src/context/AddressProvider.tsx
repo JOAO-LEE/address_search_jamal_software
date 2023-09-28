@@ -10,9 +10,6 @@ export default function AddressProvider({children}: TProviderProps) {
             setAddress([...address, addressToAdd])
         } 
     }
-        // address.forEach((addr) => {
-        //     addr.cep !== addressToAdd.cep && setAddress([...address, addressToAdd])
-        // })
     return (
         <>
          <AddressContext.Provider value={{address, addAddress}}>

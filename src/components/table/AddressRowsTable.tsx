@@ -18,6 +18,7 @@ let { address } = useContext(AddressContext);
                     <TableRow key={index} >
                         <TableCell>{address.cep}</TableCell>
                         <TableCell>{address.logradouro}</TableCell>
+                        <TableCell>{address.bairro}</TableCell>
                         <TableCell>{address.complemento}</TableCell>
                         <TableCell>{address.uf}</TableCell>
                         <TableCell>{address.ibge}</TableCell>

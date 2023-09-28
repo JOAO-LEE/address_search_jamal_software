@@ -4,8 +4,8 @@ export default function AddressContainerTable({children}: {children: ReactNode})
     return (
         <TableContainer component={ Paper }>
             <Table sx={{ minWidth: 350 }} aria-label="simple table">
-               {children}
+               { children }
             </Table>
         </TableContainer>
-        )
-    }
+    )
+}

@@ -12,12 +12,12 @@ export default function AddressInput () {
         <Input 
         name="address-input"
         placeholder='Ex: "00000000"' 
-        error={inputErrorFeedback}
+        error={!inputErrorFeedback}
         onChange={(e) => inputAddress(e.target.value)} 
         value={addressInput} 
         aria-describedby="component-error-text" 
         id="address-input"/>
-        {inputErrorFeedback && <FormHelperText id="component-error-text">O CEP precisa ser no formato "00000000"!</FormHelperText>}
+        {!inputErrorFeedback && <FormHelperText id="component-error-text">O CEP precisa ser no formato "00000000"!</FormHelperText>}
         <SearchButton isButtonEnabled={inputErrorFeedback}  />
     </>
   )

@@ -9,7 +9,14 @@ export default function AddressInput () {
   return (
     <>
       <InputLabel htmlFor="address-input" size="small" variant="standard">Digite aqui o CEP!</InputLabel>
-        <Input name="address-input" placeholder='Ex: "00000000"' error={inputErrorFeedback} onChange={(e) => inputAddress(e.target.value)} value={addressInput} aria-describedby="component-error-text" id="address-input"/>
+        <Input 
+        name="address-input"
+        placeholder='Ex: "00000000"' 
+        error={inputErrorFeedback}
+        onChange={(e) => inputAddress(e.target.value)} 
+        value={addressInput} 
+        aria-describedby="component-error-text" 
+        id="address-input"/>
         {inputErrorFeedback && <FormHelperText id="component-error-text">O CEP precisa ser no formato "00000000"!</FormHelperText>}
         <SearchButton isButtonEnabled={inputErrorFeedback}  />
     </>

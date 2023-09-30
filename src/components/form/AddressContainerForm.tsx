@@ -8,7 +8,7 @@ import InputContext from "../../context/InputContext";
 export default function AddressContainerForm({children}: {children: ReactNode}) {  
     const { addAddress } = useContext(AddressContext);
     let { addressInput, inputAddress } = useContext(InputContext);
-    
+
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         inputAddress("");
@@ -19,8 +19,11 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
          });
  };   
     return (
-        <form onSubmit={handleSubmit} action={addressInput}>
-            <FormControl required variant="standard" margin="normal" >
+        <form onSubmit={handleSubmit}>
+            <FormControl 
+            required 
+            variant="standard" 
+            margin="normal">
                 {children}         
             </FormControl>
         </form>

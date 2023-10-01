@@ -6,9 +6,16 @@ import { useContext } from "react";
 
 export default function AddressInput () {
   const { addressInput, inputAddress, inputErrorFeedback} = useContext(InputContext);
+  console.log(inputErrorFeedback);
+  
   return (
     <>
-      <InputLabel htmlFor="address-input" size="small" variant="standard">Digite aqui o CEP!</InputLabel>
+      <InputLabel 
+        htmlFor="address-input" 
+        size="small" 
+        variant="standard">
+          Digite aqui o CEP!
+      </InputLabel>
         <Input 
         name="address-input"
         placeholder='Ex: "00000000"' 

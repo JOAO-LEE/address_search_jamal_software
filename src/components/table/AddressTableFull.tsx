@@ -13,13 +13,12 @@ export default function AddressTable() {
   useEffect(() => {
     axios.get("http://localhost:5198")
     .then((response: AxiosResponse<any>) => {
-      const addresses = response.data
+      response.data
       .map((addr: TAddress) => {
-        
         addAddress(addr);
       })  
     });
-  }, []);
+  }, [address]);
  
   return (
       <>

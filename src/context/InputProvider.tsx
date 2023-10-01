@@ -1,29 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputContext from './InputContext';
 import { TProviderProps } from "../interfaces/IAddress";
 
-export default function AddressProvider({children}: TProviderProps) {
-    let [addressInput, setAddressInput] = useState("");
-    let [inputErrorFeedback, setInputErrorFeedback] = useState(false);
-    let addressRegexExpression = new RegExp(/^\d{7}$/);
+export default function AddressProvider({ children }: TProviderProps) {
+  const [addressInput, setAddressInput] = useState("");
+  const [inputErrorFeedback, setInputErrorFeedback] = useState(true);
 
-    function inputAddress(cep: string) {
-        setAddressInput(cep);
-        const isAddressInputFieldEmpty = addressInput.length === 0
-        const isInputACep = addressRegexExpression.test(addressInput);
-        if (!inputErrorFeedback || isAddressInputFieldEmpty)
-        {
-            setInputErrorFeedback(true)
-        }
-        setInputErrorFeedback(isInputACep);
-    }
+  useEffect(() => {
+    const addressRegexExpression = new RegExp(/^\d{8}$/);
+    const isInputACep = addressRegexExpression.test(addressInput);
 
-    return (
-        <>
-         <InputContext.Provider 
-            value={{ addressInput, inputErrorFeedback, inputAddress }}>
-            {children}
-         </InputContext.Provider>
-        </>
-    )
-};  
+    setInputErrorFeedback(isInputACep);
+  }, [addressInput]);
+
+  function inputAddress(cep: string) {
+    setAddressInput(cep);
+  }
+
+  return (
+    <InputContext.Provider
+      value={{ addressInput, inputErrorFeedback, inputAddress }}
+    >
+      {children}
+    </InputContext.Provider>
+  );
+}

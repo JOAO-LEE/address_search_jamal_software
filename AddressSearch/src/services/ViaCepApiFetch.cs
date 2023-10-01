@@ -17,10 +17,18 @@ namespace AddressSearch.Services {
            requestMessage.Headers.Add("Accept", "application/json");
             var response = await _client.SendAsync(requestMessage);
             var wasRequestSuccesful = !response.IsSuccessStatusCode;
-             if (wasRequestSuccesful)
+
+            if (wasRequestSuccesful)
             {
                 return null!;
             }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            if (jsonResponse.Contains("\"erro\": true"))
+            {
+            return null;
+            }
+
             var result = await response.Content.ReadFromJsonAsync<Address>();
             return result!;
         }

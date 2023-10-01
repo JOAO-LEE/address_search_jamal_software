@@ -1,4 +1,4 @@
-
+import NoTableMessage from '../NoTableMessage';
 import { useContext, useEffect} from 'react';
 import AddressContext from '../../context/AddressContext';
 import axios, { AxiosResponse } from 'axios';
@@ -22,10 +22,16 @@ export default function AddressTable() {
  
   return (
       <>
-      <AddressContainerTable>
-          <AddressHeaderTable />
-          <AddressesRowsTable />
-      </AddressContainerTable>
+        {
+          address.length 
+          ?
+          <AddressContainerTable>
+            <AddressHeaderTable />
+            <AddressesRowsTable />
+          </AddressContainerTable>
+          :
+          <NoTableMessage />
+        }
       </>
   );
 }

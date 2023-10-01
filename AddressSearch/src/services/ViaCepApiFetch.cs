@@ -26,7 +26,7 @@ namespace AddressSearch.Services {
             var jsonResponse = await response.Content.ReadAsStringAsync();
             if (jsonResponse.Contains("\"erro\": true"))
             {
-            return null;
+            return null!;
             }
 
             var result = await response.Content.ReadFromJsonAsync<Address>();

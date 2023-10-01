@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import AddressContext from '../../context/AddressContext';
 
 export default function AddressHeaderTable() {
-    // let { address } = useContext(AddressContext);
+    let { address } = useContext(AddressContext);
     // const addressKeys = Object.entries(address);
     // // console.log(addressKeys);
     return (

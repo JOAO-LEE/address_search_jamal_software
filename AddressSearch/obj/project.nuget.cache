@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2VCUlLSCAc1awIYQZ9nT+y/sZ1YThtTg5OyCDGKbsq6iwHaY5XmI7sIKZveCaS4Oz2Z0WPmfPKfdEGfFbLxupg==",
+  "dgSpecHash": "AAYNFSutLt+MRJavy4OodPu11a/2UpchqQQ5P036kkZ2Pb+6oUvIPdn/afq/IoE4w+FjbIZR6YBOWeelmGus6Q==",
   "success": true,
-  "projectFilePath": "/home/joaolee/jamal_software/address_search/AddressSearch/AddressSearch.csproj",
+  "projectFilePath": "/home/joaolee/personal-projects/jamal_software/address_search_jamal_software/AddressSearch/AddressSearch.csproj",
   "expectedPackageFiles": [
     "/home/joaolee/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/home/joaolee/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",

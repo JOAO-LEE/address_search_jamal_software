@@ -1127,11 +1127,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/joaolee/jamal_software/address_search/AddressSearch/AddressSearch.csproj",
+      "projectUniqueName": "/home/joaolee/personal-projects/jamal_software/address_search_jamal_software/AddressSearch/AddressSearch.csproj",
       "projectName": "AddressSearch",
-      "projectPath": "/home/joaolee/jamal_software/address_search/AddressSearch/AddressSearch.csproj",
+      "projectPath": "/home/joaolee/personal-projects/jamal_software/address_search_jamal_software/AddressSearch/AddressSearch.csproj",
       "packagesPath": "/home/joaolee/.nuget/packages/",
-      "outputPath": "/home/joaolee/jamal_software/address_search/AddressSearch/obj/",
+      "outputPath": "/home/joaolee/personal-projects/jamal_software/address_search_jamal_software/AddressSearch/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/joaolee/.nuget/NuGet/NuGet.Config"

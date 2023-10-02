@@ -1,6 +1,5 @@
 import { InputLabel, Input, FormHelperText } from "@mui/material";
 import InputContext from '../../context/InputContext';
-
 import SearchButton from "./AddressSearchButtonForm";
 import { useContext } from "react";
 
@@ -25,7 +24,7 @@ export default function AddressInput () {
         aria-describedby="component-error-text" 
         id="address-input"/>
         {!inputErrorFeedback && <FormHelperText id="component-error-text">O CEP precisa ser no formato "00000000"!</FormHelperText>}
-        <SearchButton isButtonEnabled={inputErrorFeedback}  />
+        <SearchButton />
     </>
   )
     

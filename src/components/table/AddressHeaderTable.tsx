@@ -1,24 +1,13 @@
 import { TableCell, TableRow, TableHead } from '@mui/material';
-import { useContext } from 'react';
-import AddressContext from '../../context/AddressContext';
+import { addressKeys } from '../../helpers/AddressHandler';
 
 export default function AddressHeaderTable() {
-    let { address } = useContext(AddressContext);
-    // const addressKeys = Object.entries(address);
-    // // console.log(addressKeys);
     return (
         <TableHead>
             <TableRow>
-                <TableCell align="right">Cep</TableCell>
-                <TableCell align="right">Logradouro</TableCell>
-                <TableCell align="right">Bairro</TableCell>
-                <TableCell align="right">Complemento</TableCell>
-                <TableCell align="right">Localidade</TableCell>
-                <TableCell align="right">UF</TableCell>
-                <TableCell align="right">IBGE</TableCell>
-                <TableCell align="right">GIA</TableCell>
-                <TableCell align="right">DDD</TableCell>
-                <TableCell align="right">SIAFI</TableCell>
+                {addressKeys.map((key) => (
+                    <TableCell align="right">{key.replace(key[0], key[0].toUpperCase())}</TableCell>
+                ))}
             </TableRow>
         </TableHead>
     )

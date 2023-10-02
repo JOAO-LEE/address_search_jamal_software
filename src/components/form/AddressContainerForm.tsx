@@ -1,10 +1,11 @@
 import { FormControl } from "@mui/material";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
 import { FormEvent, ReactNode, useContext, useState } from "react";
 import AddressContext from "../../context/AddressContext";
 import InputContext from "../../context/InputContext";
 import styles from  '../../styles/styles.module.css'
 import { LinearProgress } from '@mui/material';
+import NoAddressMessage from '../NoAddressMessage';
 
 
 
@@ -12,24 +13,27 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
     const { addAddress } = useContext(AddressContext);
     let { addressInput, inputAddress } = useContext(InputContext);
     const [loading, setLoading] = useState(false);
-    const [noAddressStatus, setNoAddressStatus] = useState(false)
-
+    const [errorMessage, setErrorMessage] = useState("");
+    const [messageKey, setMessageKey] = useState("");
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         inputAddress("");
         setLoading(true)
-        
         axios.get(`http://localhost:5198/${addressInput}`)
          .then((response: AxiosResponse<any>) => {
             addAddress(response.data)
             setLoading(false);
-        }).catch((reason: AxiosResponse<any>) => {
-            setLoading(false);
-            if (reason.status === 400) {
-                
-            }
-        });
+            setErrorMessage("")
+         }).catch((error) => {
+            console.log(error);
+             if (axios.isAxiosError(error)) {
+                 setLoading(false);
+                 setErrorMessage(error.response?.data.message);
+                 setMessageKey(new Date().toISOString());
+            }  
+         })
+
  };   
     return (
         <>
@@ -42,6 +46,7 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
                 </FormControl>
             </form>
             {loading && <LinearProgress />}
+            {errorMessage && <NoAddressMessage message={errorMessage} key={messageKey}/>}
         </>
     )
 }

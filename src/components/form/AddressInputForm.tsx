@@ -5,8 +5,6 @@ import { useContext } from "react";
 
 export default function AddressInput () {
   const { addressInput, inputAddress, inputErrorFeedback} = useContext(InputContext);
-  console.log(inputErrorFeedback);
-  
   return (
     <>
       <InputLabel 

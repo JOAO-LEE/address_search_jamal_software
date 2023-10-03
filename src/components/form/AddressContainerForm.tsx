@@ -26,7 +26,6 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
             setLoading(false);
             setErrorMessage("")
          }).catch((error) => {
-            console.log(error);
              if (axios.isAxiosError(error)) {
                  setLoading(false);
                  setErrorMessage(error.response?.data.message);
@@ -41,7 +40,8 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
                 <FormControl 
                 required 
                 variant="standard" 
-                margin="normal">
+                margin="normal"
+                >
                     {children}         
                 </FormControl>
             </form>

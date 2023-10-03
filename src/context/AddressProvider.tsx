@@ -4,8 +4,8 @@ import { TAddress, TProviderProps } from "../interfaces/IAddress";
 
 export default function AddressProvider({children}: TProviderProps) {
     const [address, setAddress] = useState<Array<TAddress>>([]);
-    function addAddress(addressToAdd: TAddress): void {
-        const isCepAlreadyAvailable = address.find((addr) => addr.cep === addressToAdd.cep);
+    function addAddress(addressToAdd: TAddress): void{
+        const isCepAlreadyAvailable = address.some((addr) => addr.cep === addressToAdd.cep);
         if (!isCepAlreadyAvailable) {
             setAddress([...address, addressToAdd])
         } 

@@ -1,18 +1,24 @@
-import { Alert, Collapse, IconButton } from "@mui/material";
+import { Alert, AlertTitle, Collapse, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import { TMessage } from "../types/TMessage";
 
 export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
     const [open, setOpen] = useState(false)
+    const [previousMessage, setPreviousMessage] = useState("");
     const { message, severity, response } = feedback;
-    
+
     useEffect(() => {
         if (response) {
-          setOpen(true);
-        } 
-      }, [response]);
+          setOpen(true)
+        } else {
+          setOpen(false)
+        }
+    }, [message, severity, response])
 
+    const handleClose = () => {
+      setOpen(false);
+  };
     return (
         <Collapse in={open}>
             <Alert 
@@ -24,14 +30,13 @@ export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
                   aria-label="close"
                   color="inherit"
                   size="small"
-                  onClick={() => {
-                    setOpen(false)
-                  }}
-                >
+                  onClick={handleClose}
+                  >
                     <CloseIcon fontSize="inherit" />
                 </IconButton>
               }
-            >
+              >
+              <AlertTitle>{severity === "success" ? "Successo!" : "Erro!"}</AlertTitle>
                 {message}
             </Alert>
         </Collapse>

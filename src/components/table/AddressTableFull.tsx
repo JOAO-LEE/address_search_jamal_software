@@ -6,7 +6,7 @@ import AddressesRowsTable from './AddressRowsTable';
 import AddressHeaderTable from './AddressHeaderTable';
 import AddressContainerTable from './AddressContainerTable';
 import { LinearProgress } from '@mui/material';
-import { TMessage } from '../../types/IMessage';
+import { TMessage } from '../../types/TMessage';
 import FeedbackMessage from '../FeedbackMessage';
 
 
@@ -15,9 +15,7 @@ export default function AddressTable() {
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<TMessage>({});
 
-
   useEffect(() => {
-    setLoading(true)
     setFeedback({ response: false })
     axios.get("http://localhost:5198")
     .then((response: AxiosResponse<any>) => {
@@ -26,9 +24,7 @@ export default function AddressTable() {
       .map((addr: TAddress) => {
         addAddress(addr);
       })
-      setLoading(false);
     }).catch((error: AxiosResponse<AxiosError>) => {
-        setLoading(false);
         if (axios.isAxiosError(error)) {
           setFeedback({ response: true, message: "Endereços cadastrados", severity:"error" })
         }
@@ -37,7 +33,7 @@ export default function AddressTable() {
  
   return (
       <>
-        { loading && <LinearProgress/> }
+        { loading && <LinearProgress /> }
         { feedback.response && <FeedbackMessage feedback={feedback}/> }
           { 
             address.length >= 1

@@ -6,7 +6,7 @@ import InputContext from "../../context/InputContext";
 import styles from  '../../styles/styles.module.css'
 import { LinearProgress } from '@mui/material';
 import FeedbackMessage from '../FeedbackMessage';
-import { TMessage } from "../../types/IMessage";
+import { TMessage } from "../../types/TMessage";
 
 
 

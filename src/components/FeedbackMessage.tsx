@@ -1,7 +1,7 @@
 import { Alert, Collapse, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import { TMessage } from "../types/IMessage";
+import { TMessage } from "../types/TMessage";
 
 export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
     const [open, setOpen] = useState(false)

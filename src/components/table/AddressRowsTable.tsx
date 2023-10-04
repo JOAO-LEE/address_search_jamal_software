@@ -21,6 +21,7 @@ let { address } = useContext(AddressContext);
                                     <TableCell>{address.logradouro}</TableCell>
                                     <TableCell>{address.bairro}</TableCell>
                                     <TableCell>{address.complemento}</TableCell>
+                                    <TableCell>{address.localidade}</TableCell>
                                     <TableCell>{address.uf}</TableCell>
                                     <TableCell>{address.ibge}</TableCell>
                                     <TableCell>{address.gia}</TableCell>

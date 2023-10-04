@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AddressContext from './AddressContext';
-import { TAddress, TProviderProps } from "../interfaces/IAddress";
+import { TAddress, TProviderProps } from "../types/TAddress";
 
 export default function AddressProvider({children}: TProviderProps) {
     const [address, setAddress] = useState<Array<TAddress>>([]);

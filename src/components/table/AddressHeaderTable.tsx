@@ -5,8 +5,14 @@ export default function AddressHeaderTable() {
     return (
         <TableHead>
             <TableRow>
-                {addressKeys.map((key, index) => (
-                    <TableCell align="center" key={index}>{key.replace(key[0], key[0].toUpperCase())}</TableCell>
+                {
+                    addressKeys
+                    .map((key, index) => (
+                        <TableCell 
+                        align="center" 
+                        key={index}>
+                            {key.replace(key[0], key[0].toUpperCase())}
+                        </TableCell>
                 ))}
             </TableRow>
         </TableHead>

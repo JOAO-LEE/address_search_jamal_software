@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { IAddress } from '../interfaces/IAddress';
+import { IAddress } from '../types/TAddress';
 
 const addressContext = createContext({} as IAddress);
 

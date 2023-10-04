@@ -5,7 +5,8 @@ import AddressContext from "../../context/AddressContext";
 import InputContext from "../../context/InputContext";
 import styles from  '../../styles/styles.module.css'
 import { LinearProgress } from '@mui/material';
-import NoAddressMessage from '../NoAddressMessage';
+import FeedbackMessage from '../FeedbackMessage';
+import { TMessage } from "../../types/IMessage";
 
 
 
@@ -13,30 +14,34 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
     const { addAddress } = useContext(AddressContext);
     let { addressInput, inputAddress } = useContext(InputContext);
     const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [feedback, setFeedback] = useState<TMessage>({});
     const [messageKey, setMessageKey] = useState("");
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         inputAddress("");
         setLoading(true)
+        setFeedback({ response: false });
         axios.get(`http://localhost:5198/${addressInput}`)
-         .then((response: AxiosResponse<any>) => {
+        .then((response: AxiosResponse<any>) => {
             addAddress(response.data)
             setLoading(false);
-            setErrorMessage("")
-         }).catch((error) => {
+            setFeedback({ message: "Endereço cadastrado", severity: "success", response: true });
+        })
+        .catch((error) => {
              if (axios.isAxiosError(error)) {
-                 setLoading(false);
-                 setErrorMessage(error.response?.data.message);
-                 setMessageKey(new Date().toISOString());
+                setLoading(false);
+                setFeedback({ message: error.response?.data.message, severity: "error", response: true });
+                setMessageKey(new Date().toISOString());
             }  
-         })
-
+         });
  };   
     return (
         <>
-            <form onSubmit={handleSubmit} className={styles["address-form"]}>
+            <form 
+            onSubmit={handleSubmit} 
+            className={styles["address-form"]}
+            >
                 <FormControl 
                 required 
                 variant="standard" 
@@ -46,7 +51,14 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
                 </FormControl>
             </form>
             {loading && <LinearProgress />}
-            {errorMessage && <NoAddressMessage message={errorMessage} key={messageKey}/>}
+            {
+                feedback.response
+                && 
+                <FeedbackMessage 
+                feedback={feedback} 
+                key={messageKey} 
+                />
+            }    
         </>
     )
 }

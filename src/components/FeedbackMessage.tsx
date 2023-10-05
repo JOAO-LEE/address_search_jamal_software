@@ -5,7 +5,6 @@ import { TMessage } from "../types/TMessage";
 
 export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
     const [open, setOpen] = useState(false)
-    const [previousMessage, setPreviousMessage] = useState("");
     const { message, severity, response } = feedback;
 
     useEffect(() => {
@@ -20,25 +19,28 @@ export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
       setOpen(false);
   };
     return (
-        <Collapse in={open}>
-            <Alert 
-            variant="outlined" 
-            severity={severity}
-            action=
-              {
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={handleClose}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-              >
-              <AlertTitle>{severity === "success" ? "Successo!" : "Erro!"}</AlertTitle>
-                {message}
-            </Alert>
-        </Collapse>
+      <Collapse 
+        in={open}
+        sx={{ width: "1180px"}}
+      >
+          <Alert
+          variant="outlined" 
+          severity={severity}
+          action=
+            {
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={handleClose}
+                >
+                  <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            >
+            <AlertTitle>{ severity === "success" ? "Successo!" : "Erro!" }</AlertTitle>
+              {message}
+          </Alert>
+      </Collapse>
     )
 }

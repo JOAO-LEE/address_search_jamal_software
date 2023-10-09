@@ -18,7 +18,6 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
         event.preventDefault();
         inputAddress("");
         setLoading(true)
-        setFeedback({ response: false });
         axios.get(`http://localhost:5198/${addressInput}`)
         .then((response: AxiosResponse<any>) => {
             addAddress(response.data);
@@ -47,6 +46,7 @@ export default function AddressContainerForm({children}: {children: ReactNode}) 
                 </FormControl>
             </form>
             {loading && <LinearProgress sx={{maxWidth: "50%", display: "flex" }} />}
+            {feedback.response && <FeedbackMessage feedback={feedback}/>}
         </>
     )
 }

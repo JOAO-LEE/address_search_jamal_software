@@ -3,13 +3,11 @@ import AddressContext from './AddressContext';
 import { TAddress, TProviderProps } from "../types/TAddress";
 
 export default function AddressProvider({children}: TProviderProps) {
-    const [address, setAddress] = useState<Array<TAddress>>([]);
-    function addAddress(addressToAdd: TAddress): void{
-        const isCepAlreadyAvailable = address.some((addr) => addr.cep === addressToAdd.cep);
-        if (!isCepAlreadyAvailable) {
-            setAddress([...address, addressToAdd])
-        } 
-    }
+    const [address, setAddress] = useState<TAddress[]>([]);
+    function addAddress(addressToAdd: TAddress[]): void {
+        if (addressToAdd) {
+        }
+    };
     return (
         <>
          <AddressContext.Provider value={{address, addAddress}}>

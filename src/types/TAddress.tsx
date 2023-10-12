@@ -12,8 +12,8 @@ export type TAddress = {
 }
 
 type IAddress = {
-    address: Array<TAddress> 
-    addAddress: (address: TAddress) => void
+    address: TAddress[] 
+    addAddress: (address: TAddress[]) => void
 }
 
 type TProviderProps = {

@@ -1,6 +1,5 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { TAddress } from "../types/TAddress";
-// import { IAddress } from "../types/TAddress";
 
 const addressFetcher = async (cepNumber? : string): Promise<TAddress[] | null> => {
     if (!cepNumber) {

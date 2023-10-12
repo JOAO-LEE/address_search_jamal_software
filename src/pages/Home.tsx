@@ -5,29 +5,32 @@ import AddressContext from '../context/AddressContext';
 import { TMessage } from '../types/TMessage';
 import FeedbackMessage from '../components/FeedbackMessage';
 import { addressFetcher } from '../tasks/addressFetcher';
+import { TAddress } from '../types/TAddress';
 
 export default function Home() {
-    let { address, addAddress } = useContext(AddressContext);
+    let { addAddress } = useContext(AddressContext);
     const [feedback, setFeedback] = useState<TMessage>({});
 
     useEffect(() => {
-        const fetchData = async () => {
-            const allAddresses = await addressFetcher();
-            if (!allAddresses) {
-                setFeedback({})
+        const fetchData = async (): Promise<void> => {
+            const allAddresses: TAddress[] | null = await addressFetcher();
+            if (allAddresses) {
+                addAddress(allAddresses);
+                setFeedback({message: "Endereços cadastrados", response: true, severity: "success"});
+            } else {
+                setFeedback({message: "Algo deu errado", response: true, severity: "error"});
             }
-           const newAddresses = [...address, ...allAddresses];
-           addAddress(newAddresses);
-        }
-
+        };
         fetchData();
-      }, [address]);
+      }, []);
 
     return (
         <main>
             <Form/>
-            {feedback.response && <FeedbackMessage feedback={feedback} />}
-            <Table />
+            <section>
+                {feedback.response && <FeedbackMessage feedback={feedback} />}
+                <Table />
+            </section>
         </main>
     )
 }

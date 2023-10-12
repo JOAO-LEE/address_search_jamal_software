@@ -10,7 +10,7 @@ export default function AddressTable() {
   return (
     <>
       { 
-        address.size >= 1
+        address.length >= 1
         &&
         <AddressContainerTable>
           <AddressHeaderTable />

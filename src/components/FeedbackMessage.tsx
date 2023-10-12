@@ -21,7 +21,7 @@ export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
     return (
       <Collapse 
         in={open}
-        sx={{ width: "1180px"}}
+        sx={{ width: "88.5%"}}
       >
           <Alert
           variant="outlined" 

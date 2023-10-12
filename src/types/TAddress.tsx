@@ -11,13 +11,20 @@ export type TAddress = {
   siafi: string 
 }
 
+export type TAddressBadMessage = {
+  severity?: "success" | "error"
+  message?: string
+  response?: boolean
+}
+
 type IAddress = {
     address: TAddress[] 
     addAddress: (address: TAddress[]) => void
+    fetchAddressData: (cep?: string) => void
 }
 
 type TProviderProps = {
     children: React.ReactNode;
 }
 
-export type { IAddress,  TProviderProps };
+export type { IAddress,  TProviderProps, TAddressResponse };

@@ -1,23 +1,30 @@
 import { useState } from "react";
 import AddressContext from './AddressContext';
-import { TAddress, TProviderProps } from "../types/TAddress";
+import { TAddress, TAddressBadMessage, TProviderProps } from "../types/TAddress";
 import { addressFetcher } from "../tasks/addressFetcher";
 
 export default function AddressProvider({children}: TProviderProps) {
     const [address, setAddress] = useState<TAddress[]>([]);
+    console.log(address);
+    
+
     function addAddress(addressToAdd: TAddress[] | TAddress): void {
         if (addressToAdd) {
-            setAddress([...address, ...addressToAdd]);
-        }
-    };
+            const newAddresses = Array.isArray(addressToAdd) ? addressToAdd : [addressToAdd];
+            setAddress([...address, ...newAddresses]);  
+        };
+    }
 
-    const fetchAddressData = async (addressInput?: string): Promise<void> => {
+    const fetchAddressData = async (addressInput?: string): Promise<void | Error> => {
+       try {
         const allAddresses = await addressFetcher(addressInput);
-        console.log(allAddresses);
         if (allAddresses) {
-            addAddress([allAddresses]);
-        } else {
+            const newAddresses = Array.isArray(allAddresses) ? allAddresses : [allAddresses];
+            addAddress([...address, ...newAddresses]);
         }
+       } catch (error) {
+        return error as Error;
+       }
     };
     return (
         <>

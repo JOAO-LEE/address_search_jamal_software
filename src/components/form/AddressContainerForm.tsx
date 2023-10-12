@@ -6,32 +6,20 @@ import InputContext from "../../context/InputContext";
 import styles from  '../../styles/styles.module.css'
 import { LinearProgress } from '@mui/material';
 import FeedbackMessage from '../FeedbackMessage';
-import { TMessage } from "../../types/TMessage";
 import { addressFetcher } from "../../tasks/addressFetcher";
 import { TAddress } from "../../types/TAddress";
 
 export default function AddressContainerForm({children}: {children: ReactNode}) {  
-    const { address, addAddress } = useContext(AddressContext);
+    const { address, addAddress, fetchAddressData } = useContext(AddressContext);
     let { addressInput, inputAddress } = useContext(InputContext);
     const [loading, setLoading] = useState(false);
-    const [feedback, setFeedback] = useState<TMessage>({response: false});
-
-    const fetchData = async (): Promise<void> => {
-        const allAddresses = await addressFetcher(addressInput);
-        console.log(allAddresses);
-        if (allAddresses) {
-            addAddress([allAddresses]);
-            setFeedback({message: "Endereço cadastrado com sucesso", response: true, severity: "success"});
-        } else {
-            setFeedback({message: "Algo deu errado", response: true, severity: "error"});
-        }
-    };
+    // const [feedback, setFeedback] = useState<TMessage>({response: false});
     
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         inputAddress("");
         setLoading(true);
-        fetchData(); 
+        fetchAddressData(addressInput)
     };
 
 

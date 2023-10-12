@@ -4,7 +4,7 @@ export default function AddressContainerTable({children}: {children: ReactNode})
     return (
         <TableContainer 
         component={ Paper } 
-        sx={{ width: "max-content", padding: 3.5 }}
+        sx={{ padding: "7.5px" }}
         >
                 <Table 
                 sx={{ tableLayout: "auto" }} 

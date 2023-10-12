@@ -14,11 +14,13 @@ export default function Home() {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             const allAddresses: TAddress[] | null = await addressFetcher();
+            console.log(allAddresses);
+            
             if (allAddresses) {
                 addAddress(allAddresses);
                 setFeedback({message: "Endereços cadastrados", response: true, severity: "success"});
             } else {
-                setFeedback({message: "Algo deu errado", response: true, severity: "error"});
+                setFeedback({message: "Erro!", response: true, severity: "error"});
             }
         };
         fetchData();

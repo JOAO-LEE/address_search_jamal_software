@@ -16,7 +16,7 @@ let { address } = useContext(AddressContext);
                         address
                         .map((address: TAddress, index) =>
                             (
-                                <TableRow key={index} >
+                                <TableRow key={index + address.cep}>
                                     <TableCell>{address.cep}</TableCell>
                                     <TableCell>{address.logradouro}</TableCell>
                                     <TableCell>{address.bairro}</TableCell>

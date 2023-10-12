@@ -9,7 +9,7 @@ export default function AddressHeaderTable() {
                     addressKeys
                     .map((key, index) => (
                         <TableCell 
-                        align="center" 
+                        align="justify" 
                         key={index}>
                             {key.replace(key[0], key[0].toUpperCase())}
                         </TableCell>

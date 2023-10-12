@@ -7,30 +7,34 @@ import styles from  '../../styles/styles.module.css'
 import { LinearProgress } from '@mui/material';
 import FeedbackMessage from '../FeedbackMessage';
 import { TMessage } from "../../types/TMessage";
+import { addressFetcher } from "../../tasks/addressFetcher";
+import { TAddress } from "../../types/TAddress";
 
 export default function AddressContainerForm({children}: {children: ReactNode}) {  
-    const { addAddress } = useContext(AddressContext);
+    const { address, addAddress } = useContext(AddressContext);
     let { addressInput, inputAddress } = useContext(InputContext);
     const [loading, setLoading] = useState(false);
     const [feedback, setFeedback] = useState<TMessage>({response: false});
 
+    const fetchData = async (): Promise<void> => {
+        const allAddresses = await addressFetcher(addressInput);
+        console.log(allAddresses);
+        if (allAddresses) {
+            addAddress([allAddresses]);
+            setFeedback({message: "Endereço cadastrado com sucesso", response: true, severity: "success"});
+        } else {
+            setFeedback({message: "Algo deu errado", response: true, severity: "error"});
+        }
+    };
+    
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         inputAddress("");
-        setLoading(true)
-        axios.get(`http://localhost:5198/${addressInput}`)
-        .then((response: AxiosResponse<any>) => {
-            addAddress(response.data);
-            setLoading(false);
-            setFeedback({ message: "Endereço foi cadastrado!", severity: "success", response: true });
-        })
-        .catch((error) => {
-             if (axios.isAxiosError(error)) {
-                setLoading(false);
-                setFeedback({ message: error.response?.data.message, severity: "error", response: true });
-            }  
-         });
- };
+        setLoading(true);
+        fetchData(); 
+    };
+
+
     return (
         <>
             <form 

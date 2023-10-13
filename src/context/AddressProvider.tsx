@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AddressContext from './AddressContext';
-import { TAddress, TProviderProps } from "../types/address/TAddress";
+import { TAddress } from "../types/address/TAddress";
+import { TProviderProps } from '../types/children/TChildren'
 import { addressFetcher } from "../tasks/addressFetcher";
-import { BadMessage } from "../classes/BadResponseMessage";
+import { BadMessage } from "../error/BadResponseMessage";
 import axios, { AxiosError } from "axios";
 
 export default function AddressProvider({children}: TProviderProps) {

@@ -1,13 +1,13 @@
 import { AxiosError } from "axios";
-import { TAddressBadMessage, TSeverity } from "../types/address/TAddress";
+import { TSeverity } from "../types/message/TMessage";
 
-export class BadMessage implements TAddressBadMessage {
+export class BadMessage implements Error {
     public message: string;
     public response: boolean;
     public severity: TSeverity
     public name: string;
 
-    constructor(error: AxiosError) {
+    constructor(error: AxiosError | any) {
         this.message = error.response?.data?.message
         this.response = true
         this.severity = error.response?.data?.name

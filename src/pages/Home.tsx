@@ -2,7 +2,7 @@ import Table from '../components/table/AddressTableFull';
 import Form from '../components/form/AddressFormFull';
 import { useContext, useEffect, useState } from 'react';
 import AddressContext from '../context/AddressContext';
-import FeedbackMessage from '../components/FeedbackMessage';
+import FeedbackMessage from '../components/messenger/FeedbackMessage';
 import { TAddressBadMessage } from '../types/address/TAddress';
 import axios, { AxiosError } from 'axios';
 

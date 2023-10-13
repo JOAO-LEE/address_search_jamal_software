@@ -1,9 +1,9 @@
 import { Alert, AlertTitle, Collapse, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import { TAddressBadMessage } from "../types/address/TAddress";
+import { TMessage } from "../../types/message/TMessage";
 
-export default function FeedbackMessage({ feedback }: { feedback: TAddressBadMessage }) {
+export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
     const [open, setOpen] = useState(false)
     const { message, severity, response, name } = feedback;
 

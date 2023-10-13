@@ -1,17 +1,18 @@
 import axios from "axios";
-import { TAddress, TAddressBadMessage } from "../types/TAddress";
+import { TAddress, TAddressBadMessage } from "../types/address/TAddress";
+import { BadMessage } from "../classes/BadResponseMessage";
 
-const addressFetcher = async (cepNumber? : string): Promise<TAddress | TAddress[] | TAddressBadMessage> => {
+const addressFetcher = async (cepNumber? : string): Promise<TAddress | TAddress[] | void> => {
     try {
         const response =  await axios.get(`http://localhost:5198/${cepNumber || ""}`);
         const { data } = response
         return data
-       } catch (error) {
+       } catch (error: TAddressBadMessage | any) {
+        console.log(error);
         if (axios.isAxiosError(error)) {
-            return { response: true, message: error.message, severity: "error" }
+            throw new BadMessage(error);
         };
     }
-    return { message: "Something went wrong! Sorry!", response: true, severity: "error" };
 };
 
 

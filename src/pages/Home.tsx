@@ -2,22 +2,34 @@ import Table from '../components/table/AddressTableFull';
 import Form from '../components/form/AddressFormFull';
 import { useContext, useEffect, useState } from 'react';
 import AddressContext from '../context/AddressContext';
-import { TMessage } from '../types/TMessage';
 import FeedbackMessage from '../components/FeedbackMessage';
+import { TAddressBadMessage } from '../types/address/TAddress';
+import axios, { AxiosError } from 'axios';
 
 export default function Home() {
-    let { address, fetchAddressData } = useContext(AddressContext);
-    const [feedback, setFeedback] = useState<TMessage>({});
+    let { fetchAddressData } = useContext(AddressContext);
+    const [feedback, setFeedback] = useState<TAddressBadMessage>();
 
     useEffect(() => {
-        fetchAddressData();
+        const fetchData = async () => {
+            try {
+                fetchAddressData();
+                setFeedback({message: "Todos os endereços cadastrados", response: true, severity: "success", name: "Success"});
+    
+            } catch (error: AxiosError | any) {
+                if(axios.isAxiosError(error))  {
+                setFeedback({ message: error.response?.data.message, response: true, severity: "error", name: "Error" });
+                }
+            }
+        }
+        fetchData();
       }, []);
 
     return (
         <main>
             <Form/>
             <section>
-                {feedback.response && <FeedbackMessage feedback={feedback} />}
+                {feedback?.response && <FeedbackMessage feedback={feedback} />}
                 <Table />
             </section>
         </main>

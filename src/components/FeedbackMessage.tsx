@@ -1,11 +1,11 @@
 import { Alert, AlertTitle, Collapse, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import { TMessage } from "../types/TMessage";
+import { TAddressBadMessage } from "../types/address/TAddress";
 
-export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
+export default function FeedbackMessage({ feedback }: { feedback: TAddressBadMessage }) {
     const [open, setOpen] = useState(false)
-    const { message, severity, response } = feedback;
+    const { message, severity, response, name } = feedback;
 
     useEffect(() => {
         if (response) {
@@ -13,7 +13,7 @@ export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
         } else {
           setOpen(false)
         }
-    }, [message, severity, response])
+    }, [message, severity, response, name])
 
     const handleClose = () => {
       setOpen(false);
@@ -37,7 +37,7 @@ export default function FeedbackMessage({ feedback }: { feedback: TMessage }) {
               </IconButton>
             }
             >
-            <AlertTitle>{ severity === "success" ? "Successo!" : "Erro!" }</AlertTitle>
+            <AlertTitle>{name}</AlertTitle>
               {message}
           </Alert>
       </Collapse>

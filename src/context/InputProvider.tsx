@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import InputContext from './InputContext';
-import { TProviderProps } from "../types/TAddress";
+import { TProviderProps } from "../types/address/TAddress";
 
 export default function AddressProvider({ children }: TProviderProps) {
   const [addressInput, setAddressInput] = useState("");

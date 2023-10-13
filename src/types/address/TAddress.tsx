@@ -11,11 +11,7 @@ export type TAddress = {
   siafi: string 
 }
 
-export type TAddressBadMessage = {
-  severity?: "success" | "error"
-  message?: string
-  response?: boolean
-}
+type TSeverity = "success" | "error"
 
 type IAddress = {
     address: TAddress[] 
@@ -27,4 +23,4 @@ type TProviderProps = {
     children: React.ReactNode;
 }
 
-export type { IAddress,  TProviderProps, TAddressResponse };
+export type { IAddress,  TProviderProps, TAddressBadMessage, TSeverity };

@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import AddressContext from '../../context/AddressContext';
 import { TableCell, TableRow, TableBody } from '@mui/material';
-import { TAddress } from '../../types/TAddress';
+import { TAddress } from '../../types/address/TAddress';
 
 export default function AddressesRowsTable() {
 let { address } = useContext(AddressContext);

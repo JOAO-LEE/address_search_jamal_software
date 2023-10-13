@@ -1,7 +1,9 @@
 import { useState } from "react";
 import AddressContext from './AddressContext';
-import { TAddress, TAddressBadMessage, TProviderProps } from "../types/TAddress";
+import { TAddress, TProviderProps } from "../types/address/TAddress";
 import { addressFetcher } from "../tasks/addressFetcher";
+import { BadMessage } from "../classes/BadResponseMessage";
+import axios, { AxiosError } from "axios";
 
 export default function AddressProvider({children}: TProviderProps) {
     const [address, setAddress] = useState<TAddress[]>([]);
@@ -15,15 +17,15 @@ export default function AddressProvider({children}: TProviderProps) {
         };
     }
 
-    const fetchAddressData = async (addressInput?: string): Promise<void | Error> => {
+    const fetchAddressData = async (addressInput?: string): Promise<void> => {
        try {
-        const allAddresses = await addressFetcher(addressInput);
+        const allAddresses = await addressFetcher(addressInput);        
         if (allAddresses) {
             const newAddresses = Array.isArray(allAddresses) ? allAddresses : [allAddresses];
             addAddress([...address, ...newAddresses]);
         }
-       } catch (error) {
-        return error as Error;
+       } catch (error: AxiosError | unknown) {
+        if(axios.isAxiosError(error)) throw new BadMessage(error);
        }
     };
     return (
